@@ -3,8 +3,12 @@
   min-height: 100vh;
   font-size: calc(10px + 2vmin);
   padding: 10px 20px;
-  color: #09d3ac;
   font-weight: bold;
+  color: #09d3ac;
+}
+
+.App-header a{
+  color: #09d3ac;
 }
 
 .App-logo {

@@ -7,17 +7,15 @@ type Message = {
   id: number
 }
 
-const App: React.FC = () => {
-
+const useSocket = (url: string) => {
   const [started, setStarted] = useState(false)
+  const [lastMessage, setLastMessage] = useState<string>()
 
-  const [lastMessage, setLastMessage] = useState<String>()
-
-  const hitSocket = () => {
+  useEffect(() => {
     console.log("Starting!")
     setStarted(true)
 
-    const ws = new WebSocket("ws://localhost:4000/events/read")
+    const ws = new WebSocket(url)
 
     ws.onmessage = msg => { setLastMessage(msg.data) }
 
@@ -25,15 +23,19 @@ const App: React.FC = () => {
       console.log("Closing websocket!")
       ws.close()
     }
-  }
+  }, [url])
 
-  useEffect(hitSocket, [])
+  return { started, lastMessage }
+}
+
+const App: React.FC = () => {
+  const { started, lastMessage } = useSocket("ws://localhost:4000/events/read")
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo"></img>
-        <a>
+        <img src={logo} className="App-logo" alt="logo"></img>
+        <a href="#">
           Learn React. Started: {started.toString()}
         </a>
         <ul>

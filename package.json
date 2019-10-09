@@ -12,6 +12,9 @@
     "react-scripts": "3.2.0",
     "typescript": "3.6.3"
   },
+  "devDependencies": {
+    "eslint-plugin-react-hooks": "^2.1.2"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -19,7 +22,12 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "plugins": "react-hooks",
+    "extends": "react-app",
+    "rules": {
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn"
+    }
   },
   "browserslist": {
     "production": [
